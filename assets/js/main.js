@@ -1,28 +1,30 @@
-//import html element currentDay ID & Set Moment to current day & Time
-const hourEl = $('.hour')
-const saveBtnEl = $('.fa-save')
+const saveBtnEl = $('.fa-save');
+const textAreaEl = $('.text-area');
+
+var currentHour = moment().hours(); //retrive current hour
 
 
-var now = moment();
-var today = moment().format('LLLL');
+//Current time output to HTML. Updates every second//
+setInterval(function () {
+    $('#currentDay').text(moment().format('LLLL'));
+}, 1000);
+
+//console log on save click event
+$(textAreaEl).click(function () {
+    console.log(parseInt($(this).attr("data-time")));
+});
 
 
-$('#currentDay').text(today); //Outputs todays date in jumbotron
+function setBackground() {
+    if ($("[data-time = 8]")) {
+        $(textAreaEl).removeClass('future present').addClass('past');
+     } else if ($("[data-time = 9]")){
+         $(textAreaEl).removeClass('future past').addClass('present');
+     } else if ($("[data-time = 10]")){
+         $(textAreaEl).removeClass('present past').addClass('future');
+     }
+};
 
+setBackground();
 
-
-function past(){
-
-}
-
-function present(){
-
-}
-
-function future(){
-
-}
-
-function updateTime(){
-
-}
+console.log($("[data-time = '8']"))
