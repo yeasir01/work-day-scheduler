@@ -2,7 +2,7 @@ const saveBtnEl = $('.fa-save');
 const textAreaEl = $('.text-area');
 
 var currentHour = moment().hours(); //retrive current hour
-
+var len = textAreaEl.length
 
 //Current time output to HTML. Updates every second//
 setInterval(function () {
@@ -14,17 +14,16 @@ $(textAreaEl).click(function () {
     console.log(parseInt($(this).attr("data-time")));
 });
 
-
 function setBackground() {
-    if ($("[data-time = 8]")) {
-        $(textAreaEl).removeClass('future present').addClass('past');
-     } else if ($("[data-time = 9]")){
-         $(textAreaEl).removeClass('future past').addClass('present');
-     } else if ($("[data-time = 10]")){
-         $(textAreaEl).removeClass('present past').addClass('future');
-     }
+    for (var i = 8; i < len; i++) {
+        if ($(textAreaEl).data('data-time') === 8) {
+            $(this).removeClass('future present').addClass('past');
+        } else if ($(textAreaEl).data('time') === 9) {
+            $(this).removeClass('future past').addClass('present');
+        } else if ($(textAreaEl).data('time') === 10) {
+            $(this).removeClass('present past').addClass('future');
+        }
+    }
 };
 
 setBackground();
-
-console.log($("[data-time = '8']"))
