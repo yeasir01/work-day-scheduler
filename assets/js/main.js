@@ -1,14 +1,12 @@
 var currentHour = moment().hours(); //retrives current hour
 
-//Current time - outputs to Jumbotron. Will updates every second
-setInterval(function () {
-    $('#currentDay').text(moment().format('LLLL'));
-}, 1000);
+//set intial time on page load
+timerInterval();
 
-//set intial background colors on page load by calling function
+//set intial background colors on page load
 setBackground();
 
-//Every 1 seconds this function runs to check if attribute "data-time" is <=> current time, if so set the class.
+//Function runs to check if attribute "data-time" is <=> current time, if so set the appropriate class based on time.
 function setBackground() {
     $(".time-row").each(function () {
         var blockHour = parseInt($(this).data('time'));
@@ -25,8 +23,16 @@ function setBackground() {
     });
 };
 
+//Funtion to update jumbotron date/time
+function timerInterval() {
+    $('#currentDay').text(moment().format('LLLL'));
+}
+
 //run setBackground function every 3 seconds
 setInterval(setBackground, 3000);
+
+//run timerInterval function every 1 seconds
+setInterval(timerInterval, 1000);
 
 //Save value of key index & text content to local storage
 $(".saveBtn").on("click", function () {
